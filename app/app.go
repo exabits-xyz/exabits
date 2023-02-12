@@ -106,6 +106,7 @@ import (
 	exabitsmodule "exabits/x/exabits"
 	exabitsmodulekeeper "exabits/x/exabits/keeper"
 	exabitsmoduletypes "exabits/x/exabits/types"
+
 	// this line is used by starport scaffolding # stargate/app/moduleImport
 
 	appparams "exabits/app/params"
@@ -113,8 +114,9 @@ import (
 )
 
 const (
-	AccountAddressPrefix = "cosmos"
+	AccountAddressPrefix = "exabits"
 	Name                 = "exabits"
+	ShortName = "exa"
 )
 
 // this line is used by starport scaffolding # stargate/wasm/app/enabledProposals
