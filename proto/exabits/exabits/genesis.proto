@@ -1,0 +1,12 @@
+syntax = "proto3";
+package exabits.exabits;
+
+import "gogoproto/gogo.proto";
+import "exabits/exabits/params.proto";
+
+option go_package = "exabits/x/exabits/types";
+
+// GenesisState defines the exabits module's genesis state.
+message GenesisState {
+  Params params = 1 [(gogoproto.nullable) = false];
+}
