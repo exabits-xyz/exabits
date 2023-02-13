@@ -116,7 +116,15 @@ import (
 const (
 	AccountAddressPrefix = "exabits"
 	Name                 = "exabits"
-	ShortName = "exa"
+	CommandName          = "exa"
+	ShortName            = "exa"
+	Short                = `
+                  |  _  |_   _||__   __|/ ____|
+  ___ __  __ __ _ | |_) | | |     | |  | (___  
+ / _ \\ \/ // _  ||  _ <  | |     | |   \___ \ 
+|  __/ >  <| (_| || |_) |_| |_    | |   ____) |
+ \___|/_/\_\\__,_||____/|_____|   |_|  |_____/
+   `
 )
 
 // this line is used by starport scaffolding # stargate/wasm/app/enabledProposals
