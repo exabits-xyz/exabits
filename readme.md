@@ -1,5 +1,5 @@
-# exabits
-**exabits** is a blockchain built using Cosmos SDK and Tendermint and created with [Ignite CLI](https://ignite.com/cli).
+# Exabits
+**Exabits** blockchain is built by Cosmos SDK and Tendermint, and created with [Ignite CLI](https://ignite.com/cli).
 
 ## Get started
 
