@@ -14,12 +14,12 @@ ignite chain serve
 
 Your blockchain in development can be configured with `config.yml`. To learn more, see the [Ignite CLI docs](https://docs.ignite.com).
 
-### Web Frontend
+### Frontend
 
-Ignite CLI has scaffolded a Vue.js-based web app in the `frontend` directory. Run the following commands to install dependencies and start the app:
+Ignite CLI has scaffolded a Vue.js-based web app in the `vue` directory. Run the following commands to install dependencies and start the app:
 
 ```
-cd frontend
+cd vue
 npm install
 npm run dev
 ```
