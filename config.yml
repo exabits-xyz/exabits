@@ -1,24 +1,31 @@
 version: 1
 accounts:
-    - name: zack
-      coins: ["300000000ebc"]
-    - name: deven
-      coins: ["100000000ebc"]
+- name: zack
+  coins:
+  - 300000000ebc
+- name: deven
+  coins:
+  - 100000000ebc
 faucet:
-    name: zack
-    coins: ["10000ebc"]
+  name: zack
+  coins:
+  - 10000ebc
 client:
-    openapi:
-        path: docs/static/openapi.yml
-validators:
-    - name: zack
-      bonded: "150000000ebc"
+  typescript:
+    path: ts-client
+  composables:
+    path: vue/src/composables
+  openapi:
+    path: docs/static/openapi.yml
 genesis:
-    chain_id: "exabits"
-    app_state:
-        staking:
-            params:
-                bond_denom: "ebc"
-        mint:
-            params:
-                mint_denom: "ebc"
+  app_state:
+    mint:
+      params:
+        mint_denom: ebc
+    staking:
+      params:
+        bond_denom: ebc
+  chain_id: exabits
+validators:
+- name: zack
+  bonded: 150000000ebc
