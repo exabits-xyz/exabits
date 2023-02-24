@@ -107,7 +107,10 @@ import (
 	exabitsmodulekeeper "exabits/x/exabits/keeper"
 	exabitsmoduletypes "exabits/x/exabits/types"
 
-	// this line is used by starport scaffolding # stargate/app/moduleImport
+	computingmodule "exabits/x/computing"
+		computingmodulekeeper "exabits/x/computing/keeper"
+		computingmoduletypes "exabits/x/computing/types"
+// this line is used by starport scaffolding # stargate/app/moduleImport
 
 	appparams "exabits/app/params"
 	"exabits/docs"
@@ -175,7 +178,8 @@ var (
 		ica.AppModuleBasic{},
 		vesting.AppModuleBasic{},
 		exabitsmodule.AppModuleBasic{},
-		// this line is used by starport scaffolding # stargate/app/moduleBasic
+		computingmodule.AppModuleBasic{},
+// this line is used by starport scaffolding # stargate/app/moduleBasic
 	)
 
 	// module account permissions
@@ -249,7 +253,9 @@ type App struct {
 	ScopedICAHostKeeper  capabilitykeeper.ScopedKeeper
 
 	ExabitsKeeper exabitsmodulekeeper.Keeper
-	// this line is used by starport scaffolding # stargate/app/keeperDeclaration
+	
+		ComputingKeeper computingmodulekeeper.Keeper
+// this line is used by starport scaffolding # stargate/app/keeperDeclaration
 
 	// mm is the module manager
 	mm *module.Manager
@@ -294,7 +300,8 @@ func New(
 		ibctransfertypes.StoreKey, icahosttypes.StoreKey, capabilitytypes.StoreKey, group.StoreKey,
 		icacontrollertypes.StoreKey,
 		exabitsmoduletypes.StoreKey,
-		// this line is used by starport scaffolding # stargate/app/storeKey
+		computingmoduletypes.StoreKey,
+// this line is used by starport scaffolding # stargate/app/storeKey
 	)
 	tkeys := sdk.NewTransientStoreKeys(paramstypes.TStoreKey)
 	memKeys := sdk.NewMemoryStoreKeys(capabilitytypes.MemStoreKey)
@@ -513,7 +520,17 @@ func New(
 	)
 	exabitsModule := exabitsmodule.NewAppModule(appCodec, app.ExabitsKeeper, app.AccountKeeper, app.BankKeeper)
 
-	// this line is used by starport scaffolding # stargate/app/keeperDefinition
+	
+		app.ComputingKeeper = *computingmodulekeeper.NewKeeper(
+			appCodec,
+			keys[computingmoduletypes.StoreKey],
+			keys[computingmoduletypes.MemStoreKey],
+			app.GetSubspace(computingmoduletypes.ModuleName),
+			
+			)
+		computingModule := computingmodule.NewAppModule(appCodec, app.ComputingKeeper, app.AccountKeeper, app.BankKeeper)
+
+		// this line is used by starport scaffolding # stargate/app/keeperDefinition
 
 	/**** IBC Routing ****/
 
@@ -579,7 +596,8 @@ func New(
 		transferModule,
 		icaModule,
 		exabitsModule,
-		// this line is used by starport scaffolding # stargate/app/appModule
+		computingModule,
+// this line is used by starport scaffolding # stargate/app/appModule
 	)
 
 	// During begin block slashing happens after distr.BeginBlocker so that
@@ -609,7 +627,8 @@ func New(
 		paramstypes.ModuleName,
 		vestingtypes.ModuleName,
 		exabitsmoduletypes.ModuleName,
-		// this line is used by starport scaffolding # stargate/app/beginBlockers
+		computingmoduletypes.ModuleName,
+// this line is used by starport scaffolding # stargate/app/beginBlockers
 	)
 
 	app.mm.SetOrderEndBlockers(
@@ -634,7 +653,8 @@ func New(
 		upgradetypes.ModuleName,
 		vestingtypes.ModuleName,
 		exabitsmoduletypes.ModuleName,
-		// this line is used by starport scaffolding # stargate/app/endBlockers
+		computingmoduletypes.ModuleName,
+// this line is used by starport scaffolding # stargate/app/endBlockers
 	)
 
 	// NOTE: The genutils module must occur after staking so that pools are
@@ -664,7 +684,8 @@ func New(
 		upgradetypes.ModuleName,
 		vestingtypes.ModuleName,
 		exabitsmoduletypes.ModuleName,
-		// this line is used by starport scaffolding # stargate/app/initGenesis
+		computingmoduletypes.ModuleName,
+// this line is used by starport scaffolding # stargate/app/initGenesis
 	)
 
 	// Uncomment if you want to set a custom migration order here.
@@ -694,7 +715,8 @@ func New(
 		ibc.NewAppModule(app.IBCKeeper),
 		transferModule,
 		exabitsModule,
-		// this line is used by starport scaffolding # stargate/app/appModule
+		computingModule,
+// this line is used by starport scaffolding # stargate/app/appModule
 	)
 	app.sm.RegisterStoreDecoders()
 
@@ -899,7 +921,8 @@ func initParamsKeeper(appCodec codec.BinaryCodec, legacyAmino *codec.LegacyAmino
 	paramsKeeper.Subspace(icacontrollertypes.SubModuleName)
 	paramsKeeper.Subspace(icahosttypes.SubModuleName)
 	paramsKeeper.Subspace(exabitsmoduletypes.ModuleName)
-	// this line is used by starport scaffolding # stargate/app/paramSubspace
+	paramsKeeper.Subspace(computingmoduletypes.ModuleName)
+// this line is used by starport scaffolding # stargate/app/paramSubspace
 
 	return paramsKeeper
 }

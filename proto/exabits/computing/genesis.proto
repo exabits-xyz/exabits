@@ -1,0 +1,12 @@
+syntax = "proto3";
+package exabits.computing;
+
+import "gogoproto/gogo.proto";
+import "exabits/computing/params.proto";
+
+option go_package = "exabits/x/computing/types";
+
+// GenesisState defines the computing module's genesis state.
+message GenesisState {
+  Params params = 1 [(gogoproto.nullable) = false];
+}

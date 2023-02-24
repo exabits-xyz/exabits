@@ -1,0 +1,7 @@
+syntax = "proto3";
+package exabits.computing;
+
+option go_package = "exabits/x/computing/types";
+
+// Msg defines the Msg service.
+service Msg {}
