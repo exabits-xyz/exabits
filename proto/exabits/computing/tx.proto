@@ -1,7 +1,46 @@
 syntax = "proto3";
+
 package exabits.computing;
+
+import "exabits/computing/devices.proto";
 
 option go_package = "exabits/x/computing/types";
 
 // Msg defines the Msg service.
-service Msg {}
+service Msg {
+  rpc CreateDevices (MsgCreateDevices) returns (MsgCreateDevicesResponse);
+  rpc UpdateDevices (MsgUpdateDevices) returns (MsgUpdateDevicesResponse);
+  rpc DeleteDevices (MsgDeleteDevices) returns (MsgDeleteDevicesResponse);
+}
+message MsgCreateDevices {
+  string creator      = 1;
+  string address      = 2;
+  string machineId    = 3;
+  string machineToken = 4;
+  string coords       = 5;
+  string ip           = 6;
+}
+
+message MsgCreateDevicesResponse {
+  uint64 id = 1;
+}
+
+message MsgUpdateDevices {
+  string creator      = 1;
+  uint64 id           = 2;
+  string address      = 3;
+  string machineId    = 4;
+  string machineToken = 5;
+  string coords       = 6;
+  string ip           = 7;
+}
+
+message MsgUpdateDevicesResponse {}
+
+message MsgDeleteDevices {
+  string creator = 1;
+  uint64 id      = 2;
+}
+
+message MsgDeleteDevicesResponse {}
+

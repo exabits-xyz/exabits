@@ -1,0 +1,14 @@
+syntax = "proto3";
+package exabits.computing;
+
+option go_package = "exabits/x/computing/types";
+
+message Devices {
+  uint64 id = 1;
+  string address = 2; 
+  string machineId = 3; 
+  string machineToken = 4; 
+  string coords = 5; 
+  string ip = 6; 
+  string creator = 7;
+}

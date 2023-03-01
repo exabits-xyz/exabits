@@ -12,12 +12,13 @@ const (
 
 	// MemStoreKey defines the in-memory store key
 	MemStoreKey = "mem_computing"
-
-    
 )
 
-
-
 func KeyPrefix(p string) []byte {
-    return []byte(p)
+	return []byte(p)
 }
+
+const (
+	DevicesKey      = "Devices/value/"
+	DevicesCountKey = "Devices/count/"
+)

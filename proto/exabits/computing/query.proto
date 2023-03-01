@@ -1,26 +1,58 @@
 syntax = "proto3";
+
 package exabits.computing;
 
 import "gogoproto/gogo.proto";
 import "google/api/annotations.proto";
 import "cosmos/base/query/v1beta1/pagination.proto";
 import "exabits/computing/params.proto";
+import "exabits/computing/devices.proto";
 
 option go_package = "exabits/x/computing/types";
 
 // Query defines the gRPC querier service.
 service Query {
+  
   // Parameters queries the parameters of the module.
-  rpc Params(QueryParamsRequest) returns (QueryParamsResponse) {
+  rpc Params (QueryParamsRequest) returns (QueryParamsResponse) {
     option (google.api.http).get = "/exabits/computing/params";
+  
+  }
+  
+  // Queries a list of Devices items.
+  rpc Devices    (QueryGetDevicesRequest) returns (QueryGetDevicesResponse) {
+    option (google.api.http).get = "/exabits/computing/devices/{id}";
+  
+  }
+  rpc DevicesAll (QueryAllDevicesRequest) returns (QueryAllDevicesResponse) {
+    option (google.api.http).get = "/exabits/computing/devices";
+  
   }
 }
-
 // QueryParamsRequest is request type for the Query/Params RPC method.
 message QueryParamsRequest {}
 
 // QueryParamsResponse is response type for the Query/Params RPC method.
 message QueryParamsResponse {
+  
   // params holds all the parameters of this module.
   Params params = 1 [(gogoproto.nullable) = false];
 }
+
+message QueryGetDevicesRequest {
+  uint64 id = 1;
+}
+
+message QueryGetDevicesResponse {
+  Devices Devices = 1 [(gogoproto.nullable) = false];
+}
+
+message QueryAllDevicesRequest {
+  cosmos.base.query.v1beta1.PageRequest pagination = 1;
+}
+
+message QueryAllDevicesResponse {
+  repeated Devices                                Devices    = 1 [(gogoproto.nullable) = false];
+           cosmos.base.query.v1beta1.PageResponse pagination = 2;
+}
+
