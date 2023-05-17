@@ -10,6 +10,42 @@ ignite chain serve
 
 `serve` command installs dependencies, builds, initializes, and starts your blockchain in development.
 
+## Run a single node testnet
+
+You can also run a local testnet using a single node. On a local testnet, you will be the sole validator signing blocks.
+
+**Step 1. Create network and account**
+
+First, initialize your genesis file to bootstrap your network. Create a name for your local testnet and provide a moniker to refer to your node:
+
+```bash
+exabitd init <node_moniker> --chain-id=<testnet_name>
+```
+
+Next, create a Exabits account by running the following command:
+
+```bash
+exabitd keys add <account_name>
+```
+
+**Step 2. Add account to genesis**
+
+Next, add your account to genesis and set an initial balance to start. Run the following commands to add your account and set the initial balance:
+
+```bash
+exabitd add-genesis-account $(exabitd keys show <account_name> -a) 100000000ebc
+exabitd gentx <account_name> 100000000ebc --chain-id=<testnet_name>
+exabitd collect-gentxs
+```
+
+**Step 3. Run Mises daemon**
+
+Now you can start your private Exabits network:
+
+```bash
+exabitsd start
+```
+
 ### Configure
 
 Your blockchain in development can be configured with `config.yml`. To learn more, see the [Ignite CLI docs](https://docs.ignite.com).
